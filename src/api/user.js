@@ -16,6 +16,14 @@ export const userLogin = (data) => {
 // 3.获取用户详情
 export const getUserInfo = (id) => {
   return axios({
-    url: `/user/:${id}`
+    // 我们当前所请求的api是需要授权的api,所以要根据后台的要求传入用户状态
+    // 这个状态需要根据后台的严格要求进行传递
+    // 后台要求使用：Authorization做为键,token做为值
+    // headers: {
+    //   Authorization: localStorage.getItem('token')
+    // },   因为每次请求都要写这行代码不方便  所以用拦截器  在发送请求的时候拦截  有token的时候直接加headers
+    // 拦截器写在axios封装里面
+
+    url: `/user/${id}`
   })
 }

@@ -21,12 +21,13 @@ import { getUserInfo } from '@/api/user'
 export default {
   mounted () {
     let id = this.$route.params.id
+    console.log(id)
     getUserInfo(id)
       .then((res) => {
         console.log(res)
       })
       .catch((err) => {
-        console.lo(err)
+        console.log(err)
       })
   }
 }

@@ -51,9 +51,10 @@ export default {
           if (res.data.message === '登录成功') {
             // 登录成功后获取token值  本地存储起来
             localStorage.setItem('token', res.data.data.token)
+
             this.$toast.success('恭喜登录成功')
             // 页面跳转
-            this.$router.push({ path: `/personal/:${res.data.data.user.id}` })
+            this.$router.push({ path: `/personal/${res.data.data.user.id}` })
           } else {
             this.$toast.fail(res.data.message)
           }
