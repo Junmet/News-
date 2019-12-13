@@ -10,7 +10,7 @@ const router = new VueRouter({
   routes: [
     {
       name: 'login',
-      path: 'login',
+      path: '/login',
       component: Login
     }
   ]
