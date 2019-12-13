@@ -26,6 +26,8 @@
 import LoginButton from '@/components/LoginButton'
 // 文本框组件封装的引入
 import Logintextarea from '@/components/Logintextarea'
+// 引入发送请求封装文化user.js  调用里面的userLogin的方法
+import { userLogin } from '@/api/user'
 export default {
   data () {
     return {
@@ -42,7 +44,21 @@ export default {
   methods: {
     loginBtn () {
       // console.log('123')
-      console.log(this.user)
+      // console.log(this.user)
+      userLogin(this.user)
+        .then((res) => {
+          console.log(res)
+          if (res.data.message === '登录成功') {
+            this.$toast.success('恭喜登录成功')
+          } else {
+            this.$toast.fail(res.data.message)
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+          // 发送请求失败的时候提示
+          this.$toast.fail('登录失败，请重试！')
+        })
     },
     logintext (data) {
       this.user.username = data
