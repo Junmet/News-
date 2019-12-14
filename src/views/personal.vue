@@ -3,32 +3,63 @@
     <router-link to="/edit_profile">
       <div class="profile">
         <!-- $axios.defaults.baseURL读取axios的服务器路径 -->
-        <img src="http://img1.imgtn.bdimg.com/it/u=3757784226,1202878475&fm=26&gp=0.jpg" alt />
+        <img :src="currentUser.head_img" alt />
         <div class="profile-center">
           <div class="name">
-            <span class="iconfont iconxingbienan"></span>我就是我
+            <span class="iconfont iconxingbienan"></span>{{currentUser.nickname}}
           </div>
           <div class="time">2019-9-24</div>
         </div>
         <span class="iconfont iconjiantou1"></span>
       </div>
     </router-link>
+     <personalCell title="我的关注" desc="关注的用户" @click="cellclick"></personalCell>
+     <personalCell title="我的跟帖" desc="跟帖/回复" @click="cellclick"></personalCell>
+     <personalCell title="我的收藏" desc="文章/视频" @click="cellclick"></personalCell>
+     <personalCell title="设置" desc="" @click="cellclick"></personalCell>
+     <LoginButton class="LoginButton" text="退出" @click="$router.back()"></LoginButton>
   </div>
 </template>
 
 <script>
+import personalCell from '@/components/personalCell'
+// 按钮组件封装的引入
+import LoginButton from '@/components/LoginButton'
 import { getUserInfo } from '@/api/user'
 export default {
-  mounted () {
+  data () {
+    return {
+      // 创建一个对象来接收 登录成功后获取数据
+      currentUser: {}
+    }
+  },
+  methods: {
+    cellclick () {
+      console.log('123')
+    }
+  },
+  components: {
+    personalCell, LoginButton
+  },
+  async mounted () {
+    // 获取对应的id 渲染对应的数据
     let id = this.$route.params.id
-    console.log(id)
     getUserInfo(id)
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    let res = await getUserInfo(id)
+    // console.log(this.$route)
+    // console.log(res)
+    if (res.data.message === '获取成功') {
+      // 创建一个对象来接收 登录成功后获取数据
+      this.currentUser = res.data.data
+      // 返回的数据可能没有图片数据，那么我们应该进行判断，如果有图片数据，则设置为当前图片，如果没有图片数据则需要设置为默认图片
+      if (this.currentUser.head_img) {
+        this.currentUser.head_img = localStorage.getItem('baseAddress') + this.currentUser.head_img
+      } else {
+        this.currentUser.head_img = localStorage.getItem('baseAddress') + '/uploads/image/default.png'
+      }
+    } else {
+      this.$toast.fail('获取数据失败')
+    }
   }
 }
 </script>
@@ -71,5 +102,8 @@ a{
     font-size: 14px;
     margin-top: 5px;
   }
+}
+.LoginButton{
+  margin: 50px auto;
 }
 </style>
