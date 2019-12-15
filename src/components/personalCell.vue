@@ -2,7 +2,7 @@
   <div class="personalCell" @click="cellclick">
       <div class="left">{{title}}</div>
       <div class="right">{{desc}}
-          <span class="iconfont iconjiantou1"></span>
+      <span class="iconfont iconjiantou1"></span>
       </div>
   </div>
 </template>

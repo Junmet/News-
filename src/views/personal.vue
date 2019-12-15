@@ -1,6 +1,6 @@
 <template>
   <div class="personal">
-    <router-link to="/edit_profile">
+    <router-link :to="'/personalInformation/'+currentUser.id">
       <div class="profile">
         <!-- $axios.defaults.baseURL读取axios的服务器路径 -->
         <img :src="currentUser.head_img" alt />
@@ -17,7 +17,7 @@
      <personalCell title="我的跟帖" desc="跟帖/回复" @click="cellclick"></personalCell>
      <personalCell title="我的收藏" desc="文章/视频" @click="cellclick"></personalCell>
      <personalCell title="设置" desc="" @click="cellclick"></personalCell>
-     <LoginButton class="LoginButton" text="退出" @click="$router.back()"></LoginButton>
+     <LoginButton class="LoginButton" text="退出" @click="exitApp"></LoginButton>
   </div>
 </template>
 
@@ -36,6 +36,12 @@ export default {
   methods: {
     cellclick () {
       console.log('123')
+    },
+    // 退出按钮
+    exitApp () {
+      localStorage.removeItem('baseAddress')
+      localStorage.removeItem('token')
+      this.$router.push({ name: 'index' })
     }
   },
   components: {

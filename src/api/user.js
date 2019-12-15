@@ -27,3 +27,21 @@ export const getUserInfo = (id) => {
     url: `/user/${id}`
   })
 }
+
+// 4.编辑用户信息
+export const editPersonalInformation = (id, data) => {
+  return axios({
+    method: 'post',
+    url: `/user_update/${id}`,
+    data
+  })
+}
+
+// 5.用户注册
+export const userRegister = (data) => {
+  return axios({
+    method: 'post',
+    url: '/register',
+    data
+  })
+}

@@ -6,24 +6,33 @@ import Login from '@/views/Login.vue'
 
 import personal from '@/views/personal.vue'
 
+import personalInformation from '@/views/personalInformation.vue'
+
+import Register from '../views/Register.vue'
+
 Vue.use(VueRouter)
 
 const router = new VueRouter({
   routes: [
-    {
-      name: 'slogin',
-      path: '/',
-      component: Login
-    },
     {
       name: 'login',
       path: '/login',
       component: Login
     },
     {
+      name: 'register',
+      path: '/register',
+      component: Register
+    },
+    {
       name: 'personal',
       path: '/personal/:id',
       component: personal
+    },
+    {
+      name: 'personalInformation',
+      path: '/personalInformation/:id',
+      component: personalInformation
     }
   ]
 })
