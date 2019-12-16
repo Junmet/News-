@@ -8,12 +8,19 @@ import personal from '@/views/personal.vue'
 
 import personalInformation from '@/views/personalInformation.vue'
 
-import Register from '../views/Register.vue'
+import Register from '@/views/Register.vue'
+
+import Index from '@/views/index.vue'
 
 Vue.use(VueRouter)
 
 const router = new VueRouter({
   routes: [
+    {
+      name: 'index',
+      path: '/',
+      component: Index
+    },
     {
       name: 'login',
       path: '/login',
