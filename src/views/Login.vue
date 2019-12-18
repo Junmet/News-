@@ -52,6 +52,8 @@ export default {
           if (res.data.message === '登录成功') {
             // 登录成功后获取token值  本地存储起来
             localStorage.setItem('token', res.data.data.token)
+            // 存储用户id
+            localStorage.setItem('loginid', res.data.data.user.id)
             // 存储基地址  为了方便退出清除了基地址之后登录图片不显示的结果  就是在点击登录按钮的时候本次存储基地址
             localStorage.setItem('baseAddress', axios.defaults.baseURL)
             this.$toast.success('恭喜登录成功')

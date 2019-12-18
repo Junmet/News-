@@ -45,3 +45,16 @@ export const userRegister = (data) => {
     data
   })
 }
+
+// 6.关注用户
+export const followUser = (id) => {
+  return axios({
+    url: `/user_follows/${id}`
+  })
+}
+// 7.取消关注
+export const unfollowUser = (id) => {
+  return axios({
+    url: `/user_unfollow/${id}`
+  })
+}

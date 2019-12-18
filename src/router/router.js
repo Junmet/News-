@@ -12,6 +12,8 @@ import Register from '@/views/Register.vue'
 
 import Index from '@/views/index.vue'
 
+import ArticleDetail from '@/views/articleDetail.vue'
+
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -35,6 +37,11 @@ const router = new VueRouter({
       name: 'personal',
       path: '/personal/:id',
       component: personal
+    },
+    {
+      name: 'articleDetail',
+      path: '/articleDetail/:id',
+      component: ArticleDetail
     },
     {
       name: 'personalInformation',
