@@ -28,16 +28,17 @@
     <!-- 精彩跟帖 -->
     <div class="keeps">
       <h2>精彩跟帖</h2>
-      <div class="item">
+      <!-- 遍历getcomment数组  然后把每一条数据  用点语法  动态渲染到评论模块 -->
+      <div class="item" v-for="(value,index) in getcomment" :key="index">
         <div class="head">
-          <img src="../assets/logo.png" alt />
+          <img :src="value.user.head_img" alt />
           <div>
-            <p>火星网友</p>
+            <p>{{value.user.nikename}}</p>
             <span>2小时前</span>
           </div>
           <span>回复</span>
         </div>
-        <div class="text">文章说得很有道理</div>
+        <div class="text">{{value.content}}</div>
       </div>
       <div class="more">更多跟帖</div>
     </div>
@@ -50,7 +51,7 @@
 
 <script>
 import commentArea from '@/components/commentArea'
-import { getArticleDetail, giveArticle } from '@/api/newsCat'
+import { getArticleDetail, giveArticle, getcomments } from '@/api/newsCat'
 import { followUser, unfollowUser } from '@/api/user'
 export default {
   components: {
@@ -58,14 +59,28 @@ export default {
   },
   data () {
     return {
-      application: {}
+      application: {},
+      getcomment: []
     }
   },
   async mounted () {
     // 根据id获取文章的详情，实现文章详情的动态渲染
     let res = await getArticleDetail(this.$route.params.id)
-    // console.log(res)
-    this.application = res.data.data
+    console.log(res)
+    if (res.status === 200) {
+      this.application = res.data.data
+      // console.log(this.application)
+      // 发送请求
+      let ress = await getcomments(this.application.id, { pageSize: 5 })
+      // console.log(ress)
+      this.getcomment = ress.data.data
+      console.log(this.getcomment)
+      // 数据重造   修改：给图片添加基地址  使用映射的方法
+      this.getcomment.map(value => {
+        value.user.head_img = localStorage.getItem('baseAddress') + value.user.head_img
+        return value
+      })
+    }
     // console.log(this.application)
   },
   methods: {

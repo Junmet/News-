@@ -31,9 +31,17 @@ export const collectingArticle = (id) => {
   })
 }
 
-// 6.收藏文章列表
+// 6.获取我的收藏文章列表
 export const getStar = () => {
   return axios({
     url: '/user_star'
+  })
+}
+
+// 7.评论列表
+export const getcomments = (id, params) => {
+  return axios({
+    url: `/post_comment/${id}`,
+    params
   })
 }

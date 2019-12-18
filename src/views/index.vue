@@ -83,8 +83,8 @@ export default {
         // 对应的数据id
         category: this.cateList[this.active].id
       })
-      console.log(res)
-      console.log(this.cateList[this.active].postList)
+      // console.log(res)
+      // console.log(this.cateList[this.active].postList)
 
       // 新闻数据存储在当前栏目的postList中，每个栏目都有一个单独的文章列表数组
       // this.cateList[this.active].postList = res.data.data
