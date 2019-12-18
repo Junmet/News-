@@ -16,6 +16,8 @@ import ArticleDetail from '@/views/articleDetail.vue'
 
 import myCenter from '@/views/myCenter.vue'
 
+import myCollect from '@/views/myCollect.vue'
+
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -54,6 +56,11 @@ const router = new VueRouter({
       name: 'myCenter',
       path: '/myCenter',
       component: myCenter
+    },
+    {
+      name: 'myCollect',
+      path: '/myCollect',
+      component: myCollect
     }
   ]
 })

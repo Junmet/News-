@@ -15,7 +15,7 @@
     </router-link>
      <personalCell title="我的关注" desc="关注的用户" @click="$router.push({name:'myCenter'})"></personalCell>
      <personalCell title="我的跟帖" desc="跟帖/回复" ></personalCell>
-     <personalCell title="我的收藏" desc="文章/视频"></personalCell>
+     <personalCell title="我的收藏" desc="文章/视频"  @click="$router.push({name:'myCollect'})"></personalCell>
      <personalCell title="设置" desc=""></personalCell>
      <LoginButton class="LoginButton" text="退出" @click="exitApp"></LoginButton>
   </div>

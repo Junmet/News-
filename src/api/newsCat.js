@@ -30,3 +30,10 @@ export const collectingArticle = (id) => {
     url: `/post_star/${id}`
   })
 }
+
+// 6.收藏文章列表
+export const getStar = () => {
+  return axios({
+    url: '/user_star'
+  })
+}
