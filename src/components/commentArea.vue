@@ -23,6 +23,7 @@
 <script>
 import { collectingArticle } from '@/api/newsCat'
 export default {
+  // 获取父组件的application数据
   props: ['application'],
   data () {
     return {
@@ -44,6 +45,10 @@ export default {
       this.application.has_star = !this.application.has_star
       this.$toast.success(res.data.message)
     }
+    // 子传父 收藏功能写法
+    // iconshoucangBtn () {
+    //   this.$emit('click')
+    // }
   }
 }
 </script>

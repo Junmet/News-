@@ -41,6 +41,9 @@
       </div>
       <div class="more">更多跟帖</div>
     </div>
+    <!-- 通过父传子改变字体图标的样式  子传父来发送请求  实现收藏功能 -->
+    <!-- <commentArea :application="application" @click="btn"></commentArea> -->
+    <!-- 父传子  实现收藏功能 -->
     <commentArea :application="application"></commentArea>
   </div>
 </template>
@@ -94,6 +97,13 @@ export default {
       this.application.has_like = !this.application.has_like
       this.$toast.success(res.data.message)
     }
+    // 根据子传父的方法实现收藏功能
+    // async btn () {
+    //   let res = await collectingArticle(this.application.id)
+    //   console.log(res)
+    //   this.application.has_star = !this.application.has_star
+    //   this.$toast.success(res.data.message)
+    // }
 
   }
 }
