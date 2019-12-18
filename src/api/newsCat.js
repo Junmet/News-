@@ -16,3 +16,10 @@ export const getArticleDetail = (id) => {
     url: `/post/${id}`
   })
 }
+
+// 4.根据文章id点赞文章
+export const giveArticle = (id) => {
+  return axios({
+    url: `/post_like/${id}`
+  })
+}

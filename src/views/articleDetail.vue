@@ -5,7 +5,7 @@
         <van-icon name="arrow-left back" @click="$router.back()" />
         <span class="iconfont iconnew new"></span>
       </div>
-      <span @click="followThisUser" :class='{application:application.has_follow}'>{{application.has_follow?'已关注':'关注'}}</span>
+      <span @click="followThisUser" :class='{application:!application.has_follow}'>{{application.has_follow?'关注':'已关注'}}</span>
     </div>
     <div class="detail">
       <div class="title">{{application.title}}</div>
@@ -16,7 +16,7 @@
       <div class="content" v-html="application.content" v-if="application.type===1"></div>
       <video v-if="application.type===2" :src="application.content" controls></video>
       <div class="opt">
-        <span class="like">
+        <span class="like" :class="{application:application.has_like}" @click="giveArticles">
           <van-icon name="good-job-o" />
           {{application.like_length}}
         </span>
@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { getArticleDetail } from '@/api/newsCat'
+import { getArticleDetail, giveArticle } from '@/api/newsCat'
 import { followUser, unfollowUser } from '@/api/user'
 export default {
   data () {
@@ -56,16 +56,18 @@ export default {
   async mounted () {
     // 根据id获取文章的详情，实现文章详情的动态渲染
     let res = await getArticleDetail(this.$route.params.id)
-    console.log(res)
+    // console.log(res)
     this.application = res.data.data
+    // console.log(this.application)
   },
   methods: {
+    // 关注功能
     async followThisUser () {
       let res
       if (this.application.has_follow === true) {
         // 关注用户
         res = await followUser(this.application.id)
-        console.log(res)
+        // console.log(res)
       } else {
         // 取消关注
         res = await unfollowUser(this.application.id)
@@ -74,7 +76,20 @@ export default {
       this.$toast.success(res.data.message)
       // 取反  默认是关注没有颜色  点击关注 显示已关注  改变颜色
       this.application.has_follow = !this.application.has_follow
+    },
+    async giveArticles () {
+      let res = await giveArticle(this.application.id)
+      console.log(res)
+
+      if (res.data.message === '点赞成功') {
+        this.application.like_length++
+      } else if (res.data.message === '取消成功') {
+        this.application.like_length--
+      }
+      this.application.has_like = !this.application.has_like
+      this.$toast.success(res.data.message)
     }
+
   }
 }
 </script>
@@ -150,6 +165,10 @@ export default {
     text-align: center;
     border: 1px solid #ccc;
     border-radius: 15px;
+    &.application{
+      color:red;
+      border: 1px solid red !important
+    }
   }
   .w {
     color: rgb(84, 163, 5);
