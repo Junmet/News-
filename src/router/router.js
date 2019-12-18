@@ -14,6 +14,8 @@ import Index from '@/views/index.vue'
 
 import ArticleDetail from '@/views/articleDetail.vue'
 
+import myCenter from '@/views/myCenter.vue'
+
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -47,6 +49,11 @@ const router = new VueRouter({
       name: 'personalInformation',
       path: '/personalInformation/:id',
       component: personalInformation
+    },
+    {
+      name: 'myCenter',
+      path: '/myCenter',
+      component: myCenter
     }
   ]
 })

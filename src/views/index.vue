@@ -33,7 +33,7 @@ export default {
   },
   data () {
     return {
-      active: localStorage.getItem('heima_40_token') ? 1 : 0,
+      active: localStorage.getItem('token') ? 1 : 0,
       cateList: []
     }
   },

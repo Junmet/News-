@@ -58,3 +58,10 @@ export const unfollowUser = (id) => {
     url: `/user_unfollow/${id}`
   })
 }
+
+// 8.获取关注
+export const getMyCente = () => {
+  return axios({
+    url: `/user_follows`
+  })
+}
