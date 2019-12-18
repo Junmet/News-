@@ -6,13 +6,14 @@
         <i class="iconfont iconpinglun-"></i>
         <em>100</em>
       </span>
-      <i class="iconfont iconshoucang"></i>
+      <i class="iconfont iconshoucang " :class="{application:application.has_star}" @click="iconshoucangBtn" ></i>
       <i class="iconfont iconfenxiang"></i>
     </div>
     <div class="inputcomment" v-show='isFocus'>
         <textarea  ref='commtext' rows="5"></textarea>
         <div>
             <span>发送</span>
+            <br>
             <span @click='isFocus=false'>取消</span>
         </div>
     </div>
@@ -20,7 +21,9 @@
 </template>
 
 <script>
+import { collectingArticle } from '@/api/newsCat'
 export default {
+  props: ['application'],
   data () {
     return {
       isFocus: false
@@ -33,12 +36,22 @@ export default {
       setTimeout(() => {
         this.$refs.commtext.focus()
       }, 1)
+    },
+    // 收藏功能
+    async iconshoucangBtn () {
+      let res = await collectingArticle(this.application.id)
+      console.log(res)
+      this.application.has_star = !this.application.has_star
+      this.$toast.success(res.data.message)
     }
   }
 }
 </script>
 
 <style lang='less' scoped>
+.application{
+    color: #f00
+}
 .comment{
     position: fixed;
     bottom: 0;

@@ -41,13 +41,18 @@
       </div>
       <div class="more">更多跟帖</div>
     </div>
+    <commentArea :application="application"></commentArea>
   </div>
 </template>
 
 <script>
+import commentArea from '@/components/commentArea'
 import { getArticleDetail, giveArticle } from '@/api/newsCat'
 import { followUser, unfollowUser } from '@/api/user'
 export default {
+  components: {
+    commentArea
+  },
   data () {
     return {
       application: {}
@@ -95,6 +100,9 @@ export default {
 </script>
 
 <style lang='less' scoped>
+.articaldetail{
+  padding-bottom: 50px;
+}
 .header {
   padding: 0px 10px;
   height: 50px;
