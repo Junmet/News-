@@ -1,13 +1,13 @@
 <template>
 
   <div class="commentitem">
-      <mycomment v-if="comment.parent" :comment="comment.parent"></mycomment>
+      <mycomment v-if="comment.parent" :comment="comment.parent" @fastrevert="revert"></mycomment>
     <div class="head">
       <div>
         <span class="cname">{{comment.user.nickname}}</span>
         <span>2小时前</span>
       </div>
-      <span>回复</span>
+      <span @click="revert">回复</span>
     </div>
     <div class="text">{{comment.content}}</div>
   </div>
@@ -16,7 +16,12 @@
 <script>
 export default {
   name: 'mycomment',
-  props: ['comment']
+  props: ['comment'],
+  methods: {
+    revert () {
+      this.$emit('fastrevert')
+    }
+  }
 }
 </script>
 

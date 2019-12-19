@@ -45,3 +45,12 @@ export const getcomments = (id, params) => {
     params
   })
 }
+
+// 8.发布评论
+export const sendComment = (id, data) => {
+  return axios({
+    method: 'post',
+    url: `/post_comment/${id}`,
+    data
+  })
+}
