@@ -2,9 +2,9 @@
   <div class="comment">
     <div class="addcomment" v-show='!isFocus'>
       <input type="text" placeholder="写跟帖" @focus="handlerFocus" />
-      <span class="comment">
+      <span class="comment" @click="$router.push({path:`/comments/${application.id}`})">
         <i class="iconfont iconpinglun-"></i>
-        <em>100</em>
+        <em>{{application.comment_length}}</em>
       </span>
       <i class="iconfont iconshoucang " :class="{application:application.has_star}" @click="iconshoucangBtn" ></i>
       <i class="iconfont iconfenxiang"></i>
@@ -44,6 +44,8 @@ export default {
       console.log(res)
       this.application.has_star = !this.application.has_star
       this.$toast.success(res.data.message)
+      console.log(this.application.id)
+      console.log(this.application)
     }
     // 子传父 收藏功能写法
     // iconshoucangBtn () {

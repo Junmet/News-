@@ -18,6 +18,8 @@ import myCenter from '@/views/myCenter.vue'
 
 import myCollect from '@/views/myCollect.vue'
 
+import comments from '@/views/comments.vue'
+
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -61,6 +63,11 @@ const router = new VueRouter({
       name: 'myCollect',
       path: '/myCollect',
       component: myCollect
+    },
+    {
+      name: 'comments',
+      path: '/comments/:id',
+      component: comments
     }
   ]
 })
