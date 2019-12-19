@@ -58,13 +58,14 @@ export default {
       // console.log(res)
       if (res.data.message === '评论发布成功') {
         this.$toast.success(res.data.message)
+        this.replacement()
         this.isFocus = false
         // 通知父组件进行数据的刷新
         this.$emit('refresh')
         this.$refs.commtext.value = ''
         this.placeholder = ''
         // 发布成功后页面回到顶部
-        window.scrollTo(0, 0)
+        // window.scrollTo(0, 0)
       }
     },
     // 取消评论 子传父  告诉父亲给点了  清空数据
