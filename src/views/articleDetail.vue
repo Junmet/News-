@@ -5,7 +5,7 @@
         <van-icon name="arrow-left back" @click="$router.back()" />
         <span class="iconfont iconnew new"></span>
       </div>
-      <span @click="followThisUser" :class='{application:!application.has_follow}'>{{application.has_follow?'关注':'已关注'}}</span>
+      <span @click="followThisUser" :class='{application:application.has_follow}'>{{application.has_follow?'已关注':'关注'}}</span>
     </div>
     <div class="detail">
       <div class="title">{{application.title}}</div>
@@ -81,19 +81,19 @@ export default {
         return value
       })
     }
-    // console.log(this.application)
+    console.log(this.application)
   },
   methods: {
     // 关注功能
     async followThisUser () {
       let res
       if (this.application.has_follow === true) {
-        // 关注用户
-        res = await followUser(this.application.id)
+        // 关注用户 已关注
+        res = await unfollowUser(this.application.user.id)
         // console.log(res)
       } else {
-        // 取消关注
-        res = await unfollowUser(this.application.id)
+        // 取消关注 未关注
+        res = await followUser(this.application.user.id)
       }
       // 提示
       this.$toast.success(res.data.message)
